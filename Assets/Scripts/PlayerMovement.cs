@@ -36,23 +36,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = mSpeed * Time.deltaTime;
 
-        RaycastHit hit;
-
         isFlying = false;
 
-        Vector3 directionToSurface = other.transform.position - transform.position;
-        directionToSurface.Normalize();
-
-        Physics.Raycast(transform.position, directionToSurface, out hit);
-
-        directionToSurface = hit.point - transform.position;
-        directionToSurface.Normalize();
+        Vector3 down = transform.position - (transform.position + transform.up);
 
         speed *= 0.75f;
-        rb.AddRelativeForce(directionToSurface * speed, ForceMode.Acceleration);
+        rb.AddRelativeForce(down * speed, ForceMode.Acceleration);
 
-        Debug.DrawLine(transform.position, transform.position + directionToSurface, Color.red);
-        Debug.Log(hit.point);
+        Debug.DrawLine
     }
 
     void OnTriggerExit(Collider other)
