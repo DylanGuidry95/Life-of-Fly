@@ -15,30 +15,34 @@ public class PlayerMovement : MonoBehaviour
 
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
-        rb.AddRelativeForce(mVelocity * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * mSpeed * Time.deltaTime, ForceMode.Acceleration);
 
         mVelocity = Vector3.zero;
 
         mVelocity.y = Input.GetAxis("Fly");
-        rb.AddRelativeForce(mVelocity * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * mSpeed * Time.deltaTime, ForceMode.Acceleration);
 
         mDirection = Vector3.zero;
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
-        rb.AddRelativeTorque(mDirection * Time.deltaTime, ForceMode.Acceleration);
-
-        if(isFlying)
+        rb.AddRelativeTorque(mDirection * mSpeed * Time.deltaTime, ForceMode.Acceleration);
+        
+        if (isFlying)
         {
-            float zDif = -1 * transform.localEulerAngles.z;
-            rb.AddRelativeTorque(0, 0, zDif * Time.deltaTime, ForceMode.Acceleration);
+            Vector3 zeroZ = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
+            transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, zeroZ, 1);
         }
     }
+
+
 
     private Rigidbody rb;
     private Vector3 mVelocity;
     private Vector3 mDirection;
-    private float mMaxSpeed;
 
-    private bool isFlying;
+    [SerializeField]
+    private float mSpeed = 1;
+
+    private bool isFlying = false;
 }
