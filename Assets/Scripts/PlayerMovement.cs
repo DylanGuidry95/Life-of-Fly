@@ -39,8 +39,20 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         isFlying = false;
-        
-        rb.AddRelativeForce((transform.position - transform.up) * speed, ForceMode.Acceleration);
+
+        Vector3 directionToSurface = other.transform.position - transform.position;
+        directionToSurface.Normalize();
+
+        Physics.Raycast(transform.position, directionToSurface, out hit);
+
+        directionToSurface = hit.point - transform.position;
+        directionToSurface.Normalize();
+
+        speed *= 0.75f;
+        rb.AddRelativeForce(directionToSurface * speed, ForceMode.Acceleration);
+
+        Debug.DrawLine(transform.position, transform.position + directionToSurface, Color.red);
+        Debug.Log(hit.point);
     }
 
     void OnTriggerExit(Collider other)
