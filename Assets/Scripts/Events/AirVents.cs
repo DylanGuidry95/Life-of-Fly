@@ -12,7 +12,7 @@ public class AirVents : EventBase
     void BlowAir(bool state)
     {
         if (state)
-            Debug.Log("Blowing Air");
-        Debug.Log("System off");
+            Debug.Log("Blowing Air" + name);
+        Debug.Log("System off" + name);
     }
 }

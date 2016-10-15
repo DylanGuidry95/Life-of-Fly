@@ -17,7 +17,7 @@ public class EnviormentEvents : MonoBehaviour
     void Awake()
     {
         if (GetEvents() == -1 || GetEvents() == 0) //If the return value of GetEvents is -1 or 0
-            Debug.LogError("No events found with in children of this object"); //Display error that says no events where found
+            Debug.LogError("No events found on this object" + name); //Display error that says no events where found
     }
 
     /// <summary>
@@ -40,4 +40,6 @@ public class EnviormentEvents : MonoBehaviour
 
     [SerializeField]
     private System.Collections.Generic.List<EventBase> EventActions;
+
+    public string E_Tag;
 }

@@ -31,7 +31,7 @@ public class EnviormentTriggers : MonoBehaviour
         }
         foreach(EnviormentEvents e in eventArray) //Loops through each item in the event array
         {
-            if(e.tag == EventTag) //If e's tag matches the EventTag
+            if(e.E_Tag == EventTag) //If e's tag matches the EventTag
             {
                 Events.Add(e); //Add e to the Events list
             }

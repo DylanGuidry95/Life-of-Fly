@@ -15,6 +15,6 @@ public class VentNestsLayEgg : EventBase
     void CreateFlies()
     {
         //Creates the flock of flies roaming around the nesting spot
-        Debug.Log("We got flies");
+        Debug.Log("We got flies" + name);
     }
 }
