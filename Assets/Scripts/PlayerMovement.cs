@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         
         if(transform.localEulerAngles.z != 0 && isFlying)
         {
-            transform.Rotate(0, 0, -transform.localEulerAngles.z * Time.deltaTime, Space.Self);
+            //transform.Rotate(0, 0, -transform.localEulerAngles.z * Time.deltaTime, Space.Self);
         }
     }
 
