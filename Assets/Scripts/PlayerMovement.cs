@@ -17,19 +17,19 @@ public class PlayerMovement : MonoBehaviour
 
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
-        rb.AddRelativeForce(mVelocity * speed, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * speed * mSpeedMod, ForceMode.Acceleration);
 
         mVelocity = Vector3.zero;
 
         mVelocity.y = Input.GetAxis("Fly");
-        rb.AddRelativeForce(mVelocity * speed, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * speed * mFlyMod, ForceMode.Acceleration);
 
         mDirection = Vector3.zero;
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
         mDirection.z = Input.GetButton("Fire3") ? -Input.GetAxis("Horizontal") : 0;
-        rb.AddRelativeTorque(mDirection * speed, ForceMode.Acceleration);
+        rb.AddRelativeTorque(mDirection * speed * mRotationMod, ForceMode.Acceleration);
     }
 
     void OnTriggerStay(Collider other)
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 down = transform.position - (transform.position + transform.up);
         down.Normalize();
 
-        speed *= 0.75f;
+        speed *= mFlyMod * 0.25f;
 
         rb.AddForce(down * speed, ForceMode.Acceleration);
 
@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float mSpeed = 1;
+    [SerializeField]
+    private float mSpeedMod, mRotationMod, mFlyMod;
 
     private bool isFlying = true;
 }
