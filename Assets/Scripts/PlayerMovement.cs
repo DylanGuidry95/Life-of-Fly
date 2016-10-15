@@ -15,19 +15,16 @@ public class PlayerMovement : MonoBehaviour
 
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
+        transform.Translate(mVelocity * Time.deltaTime, Space.Self);
 
         mVelocity.y = Input.GetAxis("Fly");
         isFlying = mVelocity.y != 0;
+        transform.Translate(0, mVelocity.y * Time.deltaTime, 0, Space.World);
 
         mDirection = Vector3.zero;
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
-
-        mVelocity *= Time.deltaTime;
-        //mDirection *= Time.deltaTime;
-
-        transform.Translate(mVelocity, Space.Self);
         transform.Rotate(mDirection, Space.Self);
         
         if(transform.localEulerAngles.z != 0 && isFlying)
