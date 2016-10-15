@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
 
-        transform.position += mVelocity;
-	}
+        transform.Translate(mVelocity, Space.Self);
+    }
 
     private Rigidbody rb;
     private Vector3 mVelocity;
