@@ -12,21 +12,21 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
     {
         mVelocity = Vector3.zero;
+
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
-        //transform.Translate(mVelocity * Time.deltaTime, Space.Self);
         rb.AddRelativeForce(mVelocity, ForceMode.Acceleration);
+
         mVelocity = Vector3.zero;
+
         mVelocity.y = Input.GetAxis("Fly");
-        //transform.Translate(0, mVelocity.y * Time.deltaTime, 0, Space.Self);
         rb.AddRelativeForce(mVelocity, ForceMode.Acceleration);
 
         mDirection = Vector3.zero;
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
-        //transform.Rotate(mDirection, Space.Self);
-        rb.AddTorque(mDirection);
+        rb.AddTorque(mDirection, ForceMode.Acceleration);
     }
 
     private Rigidbody rb;
