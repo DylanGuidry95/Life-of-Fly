@@ -27,12 +27,7 @@ public class PlayerMovement : MonoBehaviour
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
         rb.AddRelativeTorque(mDirection * mSpeed * Time.deltaTime, ForceMode.Acceleration);
-        
-        if (isFlying)
-        {
-            Vector3 zeroZ = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
-            //transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, zeroZ, 1);
-        }
+
     }
 
     void OnTriggerStay(Collider other)
@@ -40,10 +35,13 @@ public class PlayerMovement : MonoBehaviour
         isFlying = false;
 
         Vector3 dir = other.transform.position - transform.position;
-        dir.x = dir.z = 0;
         dir.Normalize();
 
+        
+
         rb.AddRelativeForce(dir * (mSpeed * 0.7f) * Time.deltaTime, ForceMode.Acceleration);
+
+        Debug.DrawLine(transform.position, transform.position + -dir);
     }
 
     void OnTriggerExit(Collider other)
