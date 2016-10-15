@@ -35,7 +35,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    void OnTriggerStay(Collider other)
+    {
+        Vector3 dir = other.transform.position - transform.position;
+        dir.x = dir.z = 0;
+        dir.Normalize();
+        rb.AddRelativeForce(dir * (mSpeed * 0.9f) * Time.deltaTime, ForceMode.Acceleration);
+    }
 
     private Rigidbody rb;
     private Vector3 mVelocity;
