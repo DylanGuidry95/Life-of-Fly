@@ -24,6 +24,7 @@ public class BoidBehavior : MonoBehaviour
             Boids b = Instantiate(Resources.Load("Boid", typeof(Boids))) as Boids;
             b.transform.parent = transform;
             b.Position = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+            b.transform.localScale *= .1f;
             BoidSystem.Add(b);
         }
 	}
@@ -55,7 +56,7 @@ public class BoidBehavior : MonoBehaviour
         }
         force = force / (NumBoids - 1);
 
-        return (force - b.Position) / 100;
+        return (force - b.Position) / 8;
     }
 
     Vector3 Seperation(Boids b)
@@ -84,31 +85,31 @@ public class BoidBehavior : MonoBehaviour
 
         if (b.Position.x < (gameObject.transform.position.x - 1))
         {
-            v.x = .2f;
+            v.x = 1 ;
         }
         else if (b.Position.x > (gameObject.transform.position.x + 1))
         {
-            v.x = -.2f;
+            v.x = -1;
         }
 
 
         if (b.Position.y < (gameObject.transform.position.y - 1))
         {
-            v.y = .2f;
+            v.y = 1;
         }
         else if (b.Position.y > (gameObject.transform.position.y + 1))
         {
-            v.y = -.2f;
+            v.y = -1;
         }
 
 
         if (b.Position.z < (gameObject.transform.position.z - 1))
         {
-            v.z = .2f;
+            v.z = 1;
         }
         else if (b.Position.z > (gameObject.transform.position.x + 1))
         {
-            v.z = -.2f;
+            v.z = -1;
         }
 
         return v;
