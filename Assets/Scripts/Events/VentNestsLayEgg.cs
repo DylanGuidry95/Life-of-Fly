@@ -5,7 +5,7 @@ public class VentNestsLayEgg : EventBase
 {
     public override void EventBehavior()
     {
-        if (!Active && GetComponentInChildren<AirVents>().GetActvie == false)
+        if (!GetComponentInChildren<AirVents>().IsOn)
         {
             Active = true;
             CreateFlies();

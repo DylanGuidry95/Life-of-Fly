@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AirVents : EventBase
 {    
+   public bool IsOn = true;
 	public override void EventBehavior()
     {
         Active = !Active;
@@ -11,8 +12,11 @@ public class AirVents : EventBase
 
     void BlowAir(bool state)
     {
-        if (state)
-            Debug.Log("Blowing Air" + name);
+        IsOn = state;
+        if (IsOn)
+        {
+            Debug.Log("System on" + name);
+        }
         Debug.Log("System off" + name);
     }
 }
