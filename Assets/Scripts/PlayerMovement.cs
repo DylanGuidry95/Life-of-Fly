@@ -28,8 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
-        mDirection.z = Input.GetButton("Fire3") ? -Input.GetAxis("Horizontal") : 0;
+        mDirection.z = Input.GetButton("Fire3") && isFlying ? -Input.GetAxis("Horizontal") : 0;
         rb.AddRelativeTorque(mDirection * speed, ForceMode.Acceleration);
+
+        if(!isFlying)
+        {
+
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -39,11 +44,14 @@ public class PlayerMovement : MonoBehaviour
         isFlying = false;
 
         Vector3 down = transform.position - (transform.position + transform.up);
+        down.Normalize();
+
+        Debug.Log(down);
 
         speed *= 0.75f;
-        rb.AddRelativeForce(down * speed, ForceMode.Acceleration);
+        rb.AddForce(down * speed, ForceMode.Acceleration);
 
-        Debug.DrawLine
+        Debug.DrawRay(transform.position + transform.up, down * 10, Color.red);
     }
 
     void OnTriggerExit(Collider other)
