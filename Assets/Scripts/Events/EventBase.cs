@@ -9,4 +9,6 @@ public class EventBase : MonoBehaviour
         Active = !Active;
         Debug.Log("Doing My Event");
     }
+
+    public bool GetActvie { get { return Active; } }
 }
