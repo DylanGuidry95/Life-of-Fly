@@ -11,37 +11,36 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update ()
     {
+        float speed = mSpeed * Time.deltaTime;
+
         mVelocity = Vector3.zero;
 
         mVelocity.z = Input.GetAxis("Vertical");
         mVelocity.x = Input.GetAxis("Horizontal");
-        rb.AddRelativeForce(mVelocity * mSpeed * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * speed, ForceMode.Acceleration);
 
         mVelocity = Vector3.zero;
 
         mVelocity.y = Input.GetAxis("Fly");
-        rb.AddRelativeForce(mVelocity * mSpeed * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddRelativeForce(mVelocity * speed, ForceMode.Acceleration);
 
         mDirection = Vector3.zero;
 
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
-        rb.AddRelativeTorque(mDirection * mSpeed * Time.deltaTime, ForceMode.Acceleration);
-
+        mDirection.z = Input.GetButton("Fire3") ? -Input.GetAxis("Horizontal") : 0;
+        rb.AddRelativeTorque(mDirection * speed, ForceMode.Acceleration);
     }
 
     void OnTriggerStay(Collider other)
     {
+        float speed = mSpeed * Time.deltaTime;
+
+        RaycastHit hit;
+
         isFlying = false;
-
-        Vector3 dir = other.transform.position - transform.position;
-        dir.Normalize();
-
         
-
-        rb.AddRelativeForce(dir * (mSpeed * 0.7f) * Time.deltaTime, ForceMode.Acceleration);
-
-        Debug.DrawLine(transform.position, transform.position + -dir);
+        rb.AddRelativeForce((transform.position - transform.up) * speed, ForceMode.Acceleration);
     }
 
     void OnTriggerExit(Collider other)
