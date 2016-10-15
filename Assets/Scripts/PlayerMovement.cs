@@ -26,11 +26,6 @@ public class PlayerMovement : MonoBehaviour
         mDirection.x = Input.GetAxis("LookVertical");
         mDirection.y = Input.GetAxis("LookHorizontal");
         transform.Rotate(mDirection, Space.Self);
-
-        if(transform.localEulerAngles.z != 0 && isFlying)
-        {
-            //transform.Rotate(0, 0, -transform.localEulerAngles.z * Time.deltaTime, Space.Self);
-        }
     }
 
     private Rigidbody rb;
