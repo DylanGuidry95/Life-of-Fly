@@ -16,5 +16,6 @@ public class VentNestsLayEgg : EventBase
     {
         //Creates the flock of flies roaming around the nesting spot
         GetComponent<ParticleSystem>().Play();
+        FindObjectOfType<ScoreSystem>().UpdateScore();
     }
 }

@@ -9,6 +9,7 @@ public class FlyNest : EventBase
         {
             Active = !Active;
             GetComponent<ParticleSystem>().Play();
+            FindObjectOfType<ScoreSystem>().UpdateScore();
         }
     }
 }

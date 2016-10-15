@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ScoreSystem : MonoBehaviour
 {
     [SerializeField]
     private int Score = 0;
 
-    public int UpdateScore()
+    public void UpdateScore()
     {
-        return Score++;
+        Score++;
     }
 }
