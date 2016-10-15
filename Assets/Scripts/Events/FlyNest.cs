@@ -8,10 +8,7 @@ public class FlyNest : EventBase
         if(Active == false)
         {
             Active = !Active;
-            BoidBehavior b = Instantiate(Resources.Load("FlyBoid", typeof(BoidBehavior))) as BoidBehavior;
-            b.transform.parent = transform;
-            b.transform.localScale *= .1f;
-            b.transform.localPosition = Vector3.zero;
+            GetComponent<ParticleSystem>().Play();
         }
     }
 }

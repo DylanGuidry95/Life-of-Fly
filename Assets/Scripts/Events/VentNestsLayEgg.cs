@@ -5,7 +5,7 @@ public class VentNestsLayEgg : EventBase
 {
     public override void EventBehavior()
     {
-        if (!Active && GetComponent<AirVents>().GetActvie == false)
+        if (!Active && GetComponentInChildren<AirVents>().GetActvie == false)
         {
             Active = true;
             CreateFlies();
@@ -15,6 +15,6 @@ public class VentNestsLayEgg : EventBase
     void CreateFlies()
     {
         //Creates the flock of flies roaming around the nesting spot
-        Debug.Log("We got flies" + name);
+        GetComponent<ParticleSystem>().Play();
     }
 }
