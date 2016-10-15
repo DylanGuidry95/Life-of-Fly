@@ -31,16 +31,24 @@ public class PlayerMovement : MonoBehaviour
         if (isFlying)
         {
             Vector3 zeroZ = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
-            transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, zeroZ, 1);
+            //transform.localEulerAngles = Vector3.Lerp(transform.localEulerAngles, zeroZ, 1);
         }
     }
 
     void OnTriggerStay(Collider other)
     {
+        isFlying = false;
+
         Vector3 dir = other.transform.position - transform.position;
         dir.x = dir.z = 0;
         dir.Normalize();
-        rb.AddRelativeForce(dir * (mSpeed * 0.9f) * Time.deltaTime, ForceMode.Acceleration);
+
+        rb.AddRelativeForce(dir * (mSpeed * 0.7f) * Time.deltaTime, ForceMode.Acceleration);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        isFlying = true;
     }
 
     private Rigidbody rb;
@@ -50,5 +58,5 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float mSpeed = 1;
 
-    private bool isFlying = false;
+    private bool isFlying = true;
 }
